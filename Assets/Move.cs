@@ -4,28 +4,35 @@ using UnityEngine;
 
 public class Move : MonoBehaviour
 {
-private Rigidbody2D rb2d;
-    float moveSpeed,torque;
-
+    private Rigidbody2D rb2d;
+    public float moveSpeed;
+    public float jumpForce;
+    private bool isGrounded; // Flag to track ground contact
     Vector2 move;
- 
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
-        moveSpeed = 900f;
     }
-
 
     void Update()
     {
-        move = new Vector2(Input.GetAxisRaw("Horizontal"),Input.GetAxisRaw("Vertical"));
+        move = new Vector2(Input.GetAxisRaw("Horizontal"), 0f); 
         
+        rb2d.velocity = new Vector2(move.x * moveSpeed, rb2d.velocity.y);
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded) 
+        {
+            rb2d.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            isGrounded = false; 
+        }
     }
 
-    private void FixedUpdate()
-    {
-        rb2d.AddForce(move*moveSpeed*Time.deltaTime);
-        //rb2d.MovePosition(rb2d.position+(move*moveSpeed*Time.deltaTime));
-    }
    
+
+    private void OnCollisionEnter2D(Collision2D collision) 
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            isGrounded = true;
+        }
+    }
 }
