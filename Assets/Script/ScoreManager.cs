@@ -19,10 +19,17 @@ public class ScoreManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "enemy")
+        if (other.gameObject.tag == "heal")
         {
-            
-            
+            if (GameManager.health == 4)
+            {
+                GameManager.health = 4;
+            }
+            else
+            {
+                GameManager.health += 1;
+            }
+            Destroy(other.gameObject);
         }
         if (other.gameObject.tag == "coin")
         {

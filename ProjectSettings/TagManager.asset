@@ -7,6 +7,8 @@ TagManager:
   - Ground
   - coin
   - enemy
+  - heal
+  - jump
   layers:
   - Default
   - TransparentFX
