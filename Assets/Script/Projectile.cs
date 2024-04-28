@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -28,5 +29,17 @@ public class Projectile : MonoBehaviour
                 fire.velocity = projectile;
             }
         }
+    }
+
+    Vector2 CalculateProjectileVelocity(Vector2 origin, Vector2 target, float t)
+    {
+        Vector2 distance = target - origin;
+        float distX = distance.x;
+        float distY = distance.y;
+
+        float velocityX = distX / t;
+        float velocityY = distY / t+0.5f *Mathf.Abs(Physics2D.gravity.y) *t;
+        Vector2 result = new Vector2(velocityX, velocityY);
+        return result;
     }*/
 }
