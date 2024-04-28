@@ -34,5 +34,10 @@ public class Move : MonoBehaviour
         {
             isGrounded = true;
         }
+
+        if (collision.gameObject.tag == "enemy")
+        {
+            GameManager.health -= 1;
+        }
     }
 }

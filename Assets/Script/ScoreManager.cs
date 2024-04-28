@@ -19,6 +19,11 @@ public class ScoreManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.gameObject.tag == "enemy")
+        {
+            
+            
+        }
         if (other.gameObject.tag == "coin")
         {
             score++;
